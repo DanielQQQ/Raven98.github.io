@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hadoop," />
+  <meta name="keywords" content="Hadoop,NAT," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="Hadoop学习第一篇。如何在VMware下配置CentOS7系统的NAT网络模式   NAT网络模式一共有三种网络模式，分别是    桥接模式（VMnet0）   什么是桥接模式呢？形象点说，就是在真实的物理网卡与虚拟网卡VMnet0搭一条通道，这样好似把物理网卡和虚拟网卡VMnet0合二为一了，变成了一个新的网卡；假如，我们把这个网卡叫做bridge0，无论是物理机还是VMware虚拟机访问外">
-<meta name="keywords" content="Hadoop">
+<meta name="keywords" content="Hadoop,NAT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于VMware的CentOS7下NAT模式网络配置">
 <meta property="og:url" content="https://ravenxu.top/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/index.html">
@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/CentOS_NAT/1.4.png?raw=true">
 <meta property="og:image" content="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/CentOS_NAT/2.1.png?raw=true">
 <meta property="og:image" content="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/CentOS_NAT/2.2.png?raw=true">
-<meta property="og:updated_time" content="2018-04-02T13:07:36.000Z">
+<meta property="og:updated_time" content="2019-03-23T07:44:07.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于VMware的CentOS7下NAT模式网络配置">
 <meta name="twitter:description" content="Hadoop学习第一篇。如何在VMware下配置CentOS7系统的NAT网络模式   NAT网络模式一共有三种网络模式，分别是    桥接模式（VMnet0）   什么是桥接模式呢？形象点说，就是在真实的物理网卡与虚拟网卡VMnet0搭一条通道，这样好似把物理网卡和虚拟网卡VMnet0合二为一了，变成了一个新的网卡；假如，我们把这个网卡叫做bridge0，无论是物理机还是VMware虚拟机访问外">
@@ -323,6 +323,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -385,7 +407,10 @@
 <li>最后，就是仅主机模式了，这个模式其实很简单，虚拟机和物理机只要处于同一个网段，就可以通信，但是不能连接因特网。虚拟机ip属于哪个网段，要参考VMnet1这个网卡的网段。</li>
 </ul>
 <ol start="4">
-<li>一点总结<br>桥接模式是再造一个虚拟“交换机”  ，原主机和虚拟机网卡合并，处于平等地位<br>NAT模式是再造一个虚拟路由器，原主机是路由器，虚拟机网卡连接到路由器下<br>因为NAT模式相对来说更常用一些（它可以将虚拟机隐藏在主机下），所以本文只介绍NAT模式的配置<h2 id="NAT模式配置"><a href="#NAT模式配置" class="headerlink" title="NAT模式配置"></a>NAT模式配置</h2></li>
+<li>一点总结<br>桥接模式是再造一个虚拟“交换机”  ，原主机和虚拟机网卡合并，处于平等地位<br>NAT模式是再造一个虚拟路由器，原主机是路由器，虚拟机网卡连接到路由器下<br>因为NAT模式相对来说更常用一些（它可以将虚拟机隐藏在主机下），所以本文只介绍NAT模式的配置</li>
+</ol>
+<a id="more"></a>
+<h2 id="NAT模式配置"><a href="#NAT模式配置" class="headerlink" title="NAT模式配置"></a>NAT模式配置</h2><ol>
 <li>原主机部分</li>
 </ol>
 <ul>
@@ -421,6 +446,8 @@
           
             <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
           
+            <a href="/tags/NAT/" rel="tag"># NAT</a>
+          
         </div>
       
 
@@ -442,8 +469,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/14/数值分析学习笔记/" rel="prev" title="数值分析学习笔记（更新中）">
-                数值分析学习笔记（更新中） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/14/数值分析学习笔记/" rel="prev" title="数值分析学习笔记">
+                数值分析学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +573,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -557,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

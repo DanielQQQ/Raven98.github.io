@@ -273,6 +273,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/" itemprop="url">基于VMware的CentOS7下NAT模式网络配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T21:07:36+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/02/基于VMware的CentOS7下NAT模式网络配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Hadoop学习第一篇。<br>如何在VMware下配置CentOS7系统的NAT网络模式  </p>
+<h2 id="NAT网络模式"><a href="#NAT网络模式" class="headerlink" title="NAT网络模式"></a>NAT网络模式</h2><p>一共有三种网络模式，分别是  </p>
+<ol>
+<li>桥接模式（VMnet0）</li>
+</ol>
+<ul>
+<li><p>什么是桥接模式呢？形象点说，就是在真实的物理网卡与虚拟网卡VMnet0搭一条通道，这样好似把物理网卡和虚拟网卡VMnet0合二为一了，变成了一个新的网卡；假如，我们把这个网卡叫做bridge0，无论是物理机还是VMware虚拟机访问外网，都通过bridge0这个网卡来进行。</p>
+</li>
+<li><p>另外的说法是，当做了网卡的桥接，VMware里的虚拟机和物理机都处于同一个网段，由同一个交换机连接起来一样；当然，这个交换机也是虚拟的。<br><img src="https://img-blog.csdn.net/20161209145026402?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl5aWJvMzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" align="center" width="300"></p>
+</li>
+</ul>
+<ol start="2">
+<li>NAT模式（VMnet8）</li>
+</ol>
+<ul>
+<li>NAT就是“网络地址转换”，它的功能的实现需要路由器。它的作用就是把私网的ip地址转化为公网的ip地址来访问因特网。<br><img src="https://img-blog.csdn.net/20161209145317797?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl5aWJvMzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" align="center" width="300"></li>
+</ul>
+<ol start="3">
+<li>host-only模式（VMnet1）</li>
+</ol>
+<ul>
+<li>最后，就是仅主机模式了，这个模式其实很简单，虚拟机和物理机只要处于同一个网段，就可以通信，但是不能连接因特网。虚拟机ip属于哪个网段，要参考VMnet1这个网卡的网段。</li>
+</ul>
+<ol start="4">
+<li>一点总结<br>桥接模式是再造一个虚拟“交换机”  ，原主机和虚拟机网卡合并，处于平等地位<br>NAT模式是再造一个虚拟路由器，原主机是路由器，虚拟机网卡连接到路由器下<br>因为NAT模式相对来说更常用一些（它可以将虚拟机隐藏在主机下），所以本文只介绍NAT模式的配置</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/28/计算机网络学习预备知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -314,6 +496,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机理论/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机理论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -463,8 +667,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
 
@@ -512,14 +716,16 @@
 
       
         
-          MATLAB学起来!
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/13/台湾大学郭彥甫-MATLAB系列课程/">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>最近在准备2018美赛，为了重温我的MATLAB并学习MATLAB机器学习相关课程，找来了很有名的郭彥甫老师的MATLAB系列课程。<br>这套课程对有语言基础的同学来说很有帮助，不仅仅学习了MATLAB还能从MATLAB这门语言的设计思路上收获很多新的感想。</p>
+<h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h2><p><a href="https://www.youtube.com/watch?v=KHFZLkm9qs0&amp;list=PLVHBjRDK0kALcQMwAFbR5q2driYZCHNIx&amp;index=1" target="_blank" rel="noopener">Youtube-MATLAB教學</a><br><a href="https://www.bilibili.com/video/av14503445/?from=search&amp;seid=799523035367515629" target="_blank" rel="noopener">Bilibili-【搬运】MATLAB教程系列-台大（共14课）</a><br><em>建议以1.5倍速观看</em></p>
+<h2 id="我的评价"><a href="#我的评价" class="headerlink" title="我的评价"></a>我的评价</h2><p>我认为是我能在YouTube和B站上找到的最好的中文MATLAB学习视频。  </p>
+<h2 id="我的笔记（含01-07节笔记及部分MATLAB官方文档学习笔记）"><a href="#我的笔记（含01-07节笔记及部分MATLAB官方文档学习笔记）" class="headerlink" title="我的笔记（含01-07节笔记及部分MATLAB官方文档学习笔记）"></a>我的笔记（含01-07节笔记及部分MATLAB官方文档学习笔记）</h2><p>我用OneNote记录的笔记，虽然记得很烂但兴许对您有点帮助。</p>
+<p><a href="https://drive.google.com/open?id=1ne77x3GdcmCpg7ge4Vdbfz1vF_9c2n45" target="_blank" rel="noopener">PDF</a>   </p>
+<p><a href="https://1drv.ms/f/s!AilVfMoUA-GMhTs_-PMDXXXEhaJB" target="_blank" rel="noopener">OneNote</a></p>
+<h2 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h2><p>制作中…</p>
+
+          
         
       
     </div>
@@ -608,6 +814,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Geeker/" itemprop="url" rel="index">
+                    <span itemprop="name">Geeker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -647,169 +875,16 @@
 
       
         
-          
-            <p><strong>尊重原创，请先阅读这一篇教程：</strong><a href="http://www.cnblogs.com/dantefung/p/d8c48ba8030bcab7cfc364d423186fee.html" title="尊重原创" target="_blank" rel="noopener">Hexo+github搭建个人博客</a></p>
+          <p><strong>尊重原创，请先阅读这一篇教程：</strong><a href="http://www.cnblogs.com/dantefung/p/d8c48ba8030bcab7cfc364d423186fee.html" title="尊重原创" target="_blank" rel="noopener">Hexo+github搭建个人博客</a></p>
 <p>本文的目的：上面链接的教程已经足够详细，作者按照此教程已成功搭建blog。另，此教程相比其他教程更简洁，避免了本地关联github repository key value的步骤。</p>
-<p>但上述教程写作时间稍早，GitHub有一些更新，本文对更新部分进行补充并附加了一个作者在配置时遇到的bug</p>
-<h2 id="针对最新版GitHub网页的补充"><a href="#针对最新版GitHub网页的补充" class="headerlink" title="针对最新版GitHub网页的补充"></a>针对最新版GitHub网页的补充</h2><h3 id="git地址不在"><a href="#git地址不在" class="headerlink" title="git地址不在"></a>git地址不在</h3><p><img src="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/current.png?raw=true" alt="原文让我们复制的git地址"></p>
-<p>现在的GitHub不在repository主页显示git地址</p>
-<p><img src="http://img.blog.csdn.net/20180203000843921?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzc2ODcxNzc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="现在的"></p>
-<p>所以原文让我们复制的地址就是repository的地址加上.git</p>
-<p>例如<a href="https://github.com/Raven98/Raven98.github.io.git" target="_blank" rel="noopener">https://github.com/Raven98/Raven98.github.io.git</a></p>
-<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="No-1"><a href="#No-1" class="headerlink" title="No.1"></a>No.1</h3><p>原文让我们修改_config.yml文件的内容</p>
-<p><img src="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/config.png?raw=true" alt="修改_config.yml"><br><strong>注意！！这里都是有空格的！！！</strong>改了好久才发现！气死！</p>
-<p><img src="http://img.blog.csdn.net/20180203001242638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzc2ODcxNzc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="有空格这里"></p>
-<p><em>吐槽：感觉编程界常常因为空格给人带来困扰啊！！！</em></p>
-<h3 id="No-2"><a href="#No-2" class="headerlink" title="No.2"></a>No.2</h3><p>刚刚更改了样式部署到github上后发现~~怎么就404了？？<br>我是因为本地没有CNAME文件，导致部署后github认为我删除了CNAME文件从而删除了远程库里的CNAME文件。</p>
-<p>暂时解决方法：github pages设置里的domain设置成跳转的域名</p>
-<p>永久解决办法：在本地source文件夹里新建CNAME文件，写上你的域名即可</p>
-<p>同理，每次更新后README.md文件都会消失也是同理</p>
-<p>有其他问题可以留言一起讨论哦！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/13/2017APMCM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/13/2017APMCM/" itemprop="url">2017APMCM亚太地区大学生数学建模竞赛</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T21:06:20+08:00">
-                2018-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/13/2017APMCM/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/13/2017APMCM/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>趁着这次搭建我的博客，我想在博客里再增加一个记录数学建模道路的tag。<br>本文以时间轴的形式回顾了我们团队参加2017年APMCM发生的趣事。</p>
-<h2 id="17-11-23-06-00-开始"><a href="#17-11-23-06-00-开始" class="headerlink" title="17.11.23 06:00 开始"></a>17.11.23 06:00 开始</h2><p>我们还是老样子，选择了A题，开始啦~<br><br>今年的题目感觉和国赛很像啊。<br><br>甚至可以说几乎一样~国赛用到的线性回归，决策树这次一样用，但是感觉这个题的出题逻辑其实更清晰一些，还是蛮有趣的。</p>
-<p><a href="https://www.saikr.com/vse/apmcm/2017" target="_blank" rel="noopener">2017APMCM官网</a></p>
-<p><a href="https://www.saikr.com/c/nd/5453" target="_blank" rel="noopener">2017APMCM题目</a></p>
-<h2 id="17-11-23-27"><a href="#17-11-23-27" class="headerlink" title="17.11.23 - 27"></a>17.11.23 - 27</h2><p>最近课蛮多的啊~~我们其实主要就是在最后一个晚上写的论文…<br><br>和国赛一样，吃吃吃~</p>
-<p><img src="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/2017APMCM/pic1.jpg?raw=true" align="center" width="300" alt="电脑和吃的"><br><img src="https://github.com/Raven98/Raven98.github.io/blob/master/uploads/2017APMCM/pic2.jpg?raw=true" align="center" width="300" alt="每次建模必备的泡面"></p>
-<h2 id="17-11-27-09-00-截止"><a href="#17-11-27-09-00-截止" class="headerlink" title="17.11.27 09:00 截止"></a>17.11.27 09:00 截止</h2><p>交完题目啦，刷了个通宵~~</p>
-<p><a href="https://drive.google.com/open?id=1SKKrnYyCChS_5VJyJqqhpOovLBbh4IgJ" target="_blank" rel="noopener">我们的论文</a></p>
-<p>评价：作为数学建模的水赛之一，APMCM的主办单位还是蛮靠谱的~我们知道基本上现在的数模水赛都是某省研究所+某网站。APMCM是河北某研究所+赛氪合办的，赛氪作为蛮知名的竞赛服务网站肯定是很认真对待这个比赛的，比赛信息首页霸屏很久。</p>
-<p>最近听说11月初举办的数创杯发生了令人悲伤的事件~这个比赛的主办方之一——泡面网~的名字好逗</p>
-<p>既然人称“小美赛”，这个比赛我觉得对美赛准备还是很有很有帮助的~一次应为建模找找感觉，出成绩日期（今年是18.1.15）赶在美赛之前，兴许能加一波信心</p>
-<h2 id="18-01-13-21-46-结果揭晓"><a href="#18-01-13-21-46-结果揭晓" class="headerlink" title="18.01.13 21:46 结果揭晓"></a>18.01.13 21:46 结果揭晓</h2><p>算是比较符合预期吧，拿了二等奖，重点是美赛，加油加油！</p>
-<p><a href="https://publicqn.saikr.com/c464755f156d862a77c22486c57b70641516699114990.pdf" target="_blank" rel="noopener">2017APMCM获奖名单</a></p>
-
-          
+<p>但上述教程写作时间稍早，GitHub有一些更新，本文对更新部分进行补充并附加了一个作者在配置时遇到的bug<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/13/Hexo+github pages搭建个人博客/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -875,7 +950,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/03/数据结构与算法分析学习笔记/" itemprop="url">数据结构与算法分析学习笔记（附常用的五个数据结构）</a></h1>
+                <a class="post-title-link" href="/2018/02/03/数据结构与算法分析学习笔记/" itemprop="url">数据结构与算法分析学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -897,6 +972,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1043,7 +1140,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1054,7 +1151,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
