@@ -221,16 +221,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-something">
-          <a href="/something/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />
-            
-            Essay
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
@@ -259,6 +249,176 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/09/26/Java服务器配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/Java服务器配置/" itemprop="url">Java后端开发的点点滴滴</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T23:51:06+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/26/Java服务器配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/26/Java服务器配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近做了一些服务器上运行Java程序提供接口的工作，在相关工作进行时搜集到了一些服务器搭建的插件问题，整理如下：</p>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><ol>
+<li><a href="https://blog.csdn.net/u011630097/article/details/51897718" target="_blank" rel="noopener">java打包jar后，使之一直在linux上运行，不随终端退出而关闭</a>  <blockquote>
+<p>把java程序打成jar包后，放到linux上通过putty或其它终端执行的时候，如果按照：java -jar xxxx.jar执行，当我们退出putty或终端的时候，xxxx.jar这个程序也会停止。<br> 为了保证程序能够一直运行，应该改为这样运行：nohup java -jar xxx.jar&amp;命令，则程序会在后台一直运行。<br> 值得注意的是，此时程序控制台输出会被转移到nohup.out文件中，<br> 这个nohup.out文件的位置就在jar包的当前文件夹内。</p>
+</blockquote>
+</li>
+<li><a href="https://www.cnblogs.com/CEO-H/p/7794306.html" target="_blank" rel="noopener">Linux查看端口占用情况</a><blockquote>
+<p>lsof -i 用以显示符合条件的进程情况<br> lsof -i:端口号，用于查看某一端口的占用情况，比如查看22号端口使用情况，lsof -i:22<br> netstat -tunlp用于显示tcp，udp的端口和进程等相关情况<br> netstat -tunlp|grep 端口号，用于查看指定端口号的进程情况，如查看22端口的情况，netstat -tunlp|grep 22  </p>
+</blockquote>
+</li>
+</ol>
+<p>通常情况下，我们还会用到<code>kill</code>命令，<code>kill + PID</code>即可杀死对应进程。</p>
+<ol start="3">
+<li><a href="https://zhidao.baidu.com/question/564483452.html" target="_blank" rel="noopener">Linux打开名字里带括号的文件</a>  <blockquote>
+<p>括号要用转义<code>\(xxx\)</code>,有空格什么的同理</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1286,7 +1446,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1308,7 +1468,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
