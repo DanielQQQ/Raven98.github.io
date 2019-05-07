@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Blog | Raven Xu">
 <meta property="og:description" content="NeueduNeuedu (东软睿道)实训内容：Java互联网架构基础知识2019.05-07 Day 1 - Day X: MyBatis参考代码MyBatis 官方文档本文内容很大程度地参考了官方文档，mybatis有中文版本的文档并且极其简洁，推荐阅读 1. 了解MyBatis 优秀的持久层框架 支持定制化 SQL、存储过程以及高级映射 避免了几乎所有的 JDBC 代码和手动设置参数以及获取">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g2sta9fzrjj303w027glg.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1g2sifw8z3tj30fz0aujrd.jpg">
-<meta property="og:updated_time" content="2019-05-07T08:11:51.859Z">
+<meta property="og:image" content="http://ws1.sinaimg.cn/large/006tNc79ly1g2sta9fzrjj303w027glg.jpg">
+<meta property="og:image" content="http://ws3.sinaimg.cn/large/006tNc79ly1g2sifw8z3tj30fz0aujrd.jpg">
+<meta property="og:updated_time" content="2019-05-07T08:18:45.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="东软睿道实训杂记">
 <meta name="twitter:description" content="NeueduNeuedu (东软睿道)实训内容：Java互联网架构基础知识2019.05-07 Day 1 - Day X: MyBatis参考代码MyBatis 官方文档本文内容很大程度地参考了官方文档，mybatis有中文版本的文档并且极其简洁，推荐阅读 1. 了解MyBatis 优秀的持久层框架 支持定制化 SQL、存储过程以及高级映射 避免了几乎所有的 JDBC 代码和手动设置参数以及获取">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g2sta9fzrjj303w027glg.jpg">
+<meta name="twitter:image" content="http://ws1.sinaimg.cn/large/006tNc79ly1g2sta9fzrjj303w027glg.jpg">
 
 
 
@@ -367,7 +367,7 @@
       
 
       
-        <h1 id="Neuedu"><a href="#Neuedu" class="headerlink" title="Neuedu"></a>Neuedu</h1><p>Neuedu (东软睿道)<br>实训内容：Java互联网架构基础知识<br>2019.05-07<br><img src="https://ws1.sinaimg.cn/large/006tNc79ly1g2sta9fzrjj303w027glg.jpg" width="200rpx"></p>
+        <h1 id="Neuedu"><a href="#Neuedu" class="headerlink" title="Neuedu"></a>Neuedu</h1><p>Neuedu (东软睿道)<br>实训内容：Java互联网架构基础知识<br>2019.05-07<br><img src="http://ws1.sinaimg.cn/large/006tNc79ly1g2sta9fzrjj303w027glg.jpg" width="200rpx"></p>
 <h1 id="Day-1-Day-X-MyBatis"><a href="#Day-1-Day-X-MyBatis" class="headerlink" title="Day 1 - Day X: MyBatis"></a>Day 1 - Day X: MyBatis</h1><p><a href="https://github.com/Raven98/Neuedu/tree/master/TestMyBatis" target="_blank" rel="noopener">参考代码</a><br><a href="http://www.mybatis.org/mybatis-3/zh/getting-started.html" target="_blank" rel="noopener">MyBatis 官方文档</a><br>本文内容很大程度地参考了官方文档，mybatis有中文版本的文档并且极其简洁，推荐阅读</p>
 <h2 id="1-了解MyBatis"><a href="#1-了解MyBatis" class="headerlink" title="1. 了解MyBatis"></a>1. 了解MyBatis</h2><ul>
 <li>优秀的持久层框架</li>
@@ -389,7 +389,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dept d = session.selectOne(&quot;com/neuedu/model/DeptMapper.java.selectDept&quot;, 20);</span><br><span class="line">System.out.println(d.getDeptno()+&quot;\t&quot;+d.getDname()+&quot;\t&quot;+d.getLoc());</span><br></pre></td></tr></table></figure>
 <p>诚然，这种方式能够正常工作，并且对于使用旧版本 MyBatis 的用户来说也比较熟悉。不过现在有了一种更简洁的方式 ——使用正确描述每个语句的参数和返回值的接口（比如 DeptMapper.class），你现在不仅可以执行更清晰和类型安全的代码，而且还不用担心易错的字符串字面值以及强制类型转换。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DeptMapper mapper = session.getMapper(DeptMapper.class);</span><br><span class="line">Dept d = mapper.selectDept(20);</span><br><span class="line">System.out.println(d.getDeptno()+&quot;\t&quot;+d.getDname()+&quot;\t&quot;+d.getLoc());</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>新旧方式对比(个人理解)<br><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g2sifw8z3tj30fz0aujrd.jpg" alt=""><br>旧方式业务代码直接根据(namespace+id)调用XML里面的某一个方法<br>新方式将XML和接口双向绑定，业务代码不需要知道XML文件内容，直接调用接口。<br>一个显而易见的变化就是旧方式的namespace随便写，而新方式必须为xml文件所在路径<br>第二种方法有很多优势，首先它不依赖于字符串字面值，会更安全一点； 其次，如果你的 IDE 有代码补全功能，那么代码补全可以帮你快速选择<strong>已映射的 SQL 语句</strong>。<br>这样做的好处在学习初期还不能完全理解，随着学习的加深能逐渐领悟  </p>
+<p>新旧方式对比(个人理解)<br><img src="http://ws3.sinaimg.cn/large/006tNc79ly1g2sifw8z3tj30fz0aujrd.jpg" alt=""><br>旧方式业务代码直接根据(namespace+id)调用XML里面的某一个方法<br>新方式将XML和接口双向绑定，业务代码不需要知道XML文件内容，直接调用接口。<br>一个显而易见的变化就是旧方式的namespace随便写，而新方式必须为xml文件所在路径<br>第二种方法有很多优势，首先它不依赖于字符串字面值，会更安全一点； 其次，如果你的 IDE 有代码补全功能，那么代码补全可以帮你快速选择<strong>已映射的 SQL 语句</strong>。<br>这样做的好处在学习初期还不能完全理解，随着学习的加深能逐渐领悟  </p>
 </blockquote>
 <h3 id="3-3-获取查询结果"><a href="#3-3-获取查询结果" class="headerlink" title="3.3. 获取查询结果"></a>3.3. 获取查询结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//to iterate this list</span><br><span class="line">Iterator&lt;Dept&gt; it = d.iterator();</span><br><span class="line">while(it.hasNext())</span><br><span class="line">&#123;</span><br><span class="line">	Dept item = it.next();</span><br><span class="line">	//output its content</span><br><span class="line">	System.out.println(item.getDeptno()+&quot;\t&quot;+item.getDname()+&quot;\t&quot;+item.getLoc());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="4-对比JDBC和MyBatis"><a href="#4-对比JDBC和MyBatis" class="headerlink" title="4. 对比JDBC和MyBatis"></a>4. 对比JDBC和MyBatis</h2><p>直观的代码改变是MyBatis需要一个主XML配置文件，需要根据业务需求写一些mapper XML文件，需要为每个mapper XML文件编写对应的接口文件，需要为数据库内实体编写对应的Java类。<br>多了很多文件，但一定有很多好处：<br><a href="https://www.cnblogs.com/love-Stefanie/p/6838269.html" target="_blank" rel="noopener">参考资料</a></p>
@@ -464,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/人机交互/" rel="next" title="人机交互的软件工程方法课程笔记">
-                <i class="fa fa-chevron-left"></i> 人机交互的软件工程方法课程笔记
+              <a href="/2019/04/14/排序算法/" rel="next" title="排序算法">
+                <i class="fa fa-chevron-left"></i> 排序算法
               </a>
             
           </div>
@@ -563,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
