@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/28/0328-校招面试初体验/">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/04/14/自动驾驶系统课程笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Raven Xu">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/28/0328-校招面试初体验/" itemprop="url">0328-校招面试初体验&这一年</a></h1>
+                <a class="post-title-link" href="/2018/04/14/自动驾驶系统课程笔记/" itemprop="url">自动驾驶系统课程笔记</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T13:14:00+08:00">
-                2018-03-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-14T18:30:00+08:00">
+                2018-04-14
               </time>
             
 
@@ -317,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随记/" itemprop="url" rel="index">
-                    <span itemprop="name">随记</span>
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
                   </a>
                 </span>
 
@@ -335,9 +335,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/28/0328-校招面试初体验/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/14/自动驾驶系统课程笔记/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/28/0328-校招面试初体验/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/14/自动驾驶系统课程笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -366,10 +366,222 @@
 
       
         
-          <h1 id="试试看"><a href="#试试看" class="headerlink" title="试试看"></a>试试看</h1><p>前些日子腾讯来我校开暑期实习宣讲会，现场人多到爆~因为腾讯有年头没来我们学校开宣讲会了，今年能来实属不易，也感谢学院老师们背后的默默付出还有在腾讯工作的学姐学长们的努力。<br>因为是要读研，所以一直也没太准备找工作方面的事情，但感觉可以试试看，看看自己有没有能力通过第一关~索性投了WXG微信事业群的后台开发岗位。<br>
+          <p><em>本文写于19年4月智能驾驶技术课程</em><br><em>参考书籍</em></p>
+<ul>
+<li>第一本无人驾驶技术书, 2017</li>
+<li>Creating Autonomous Vehicle Systems, 2018</li>
+</ul>
+<h1 id="Ch1-Introduction-to-Autonomous-Driving-自动驾驶技术简介"><a href="#Ch1-Introduction-to-Autonomous-Driving-自动驾驶技术简介" class="headerlink" title="Ch1 Introduction to Autonomous Driving 自动驾驶技术简介"></a>Ch1 Introduction to Autonomous Driving 自动驾驶技术简介</h1><h2 id="1-1-Autonomous-Driving-Technologies-Overview-概览"><a href="#1-1-Autonomous-Driving-Technologies-Overview-概览" class="headerlink" title="1.1 Autonomous Driving Technologies Overview 概览"></a>1.1 Autonomous Driving Technologies Overview 概览</h2><p>自动驾驶技术不是一项单一的技术，而是一系列技术的整合。<br>主要由三部分构成：</p>
+<ul>
+<li>Algorithm<ul>
+<li>Sensing</li>
+<li>Perception</li>
+<li>Decision</li>
+</ul>
+</li>
+<li>Client System<ul>
+<li>Operating System</li>
+<li>Hardware Platform</li>
+</ul>
+</li>
+<li>Cloud Platform<ul>
+<li>High-definition (HD) Map</li>
+<li>Deep Learning Model Training</li>
+<li>Simulation</li>
+<li>Data storage</li>
+</ul>
+</li>
+</ul>
+<p align="center"><br><img src="http://ws1.sinaimg.cn/large/006tNc79ly1g227axbd1mj31660g2dk7.jpg" width="600"><br></p>
+
+<blockquote>
+<p>The algorithm subsystem extracts meaningful information from sensor raw data to under- stand its environment and to make decisions about its future actions. The client systems integrate these algorithms together to meet real-time and reliability requirements. For example, if the camera generates data at 60 Hz, the client systems need to make sure that the longest stage of the pro- cessing pipeline takes less than 16 ms to complete. The cloud platform provides offline computing and storage capabilities for autonomous cars. With the cloud platform, we are able to test new algorithms, update HD map, and train better recognition, tracking, and decision models.</p>
+</blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/28/0328-校招面试初体验/#more" rel="contents">
+            <a class="btn" href="/2018/04/14/自动驾驶系统课程笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/" itemprop="url">基于VMware的CentOS7下NAT模式网络配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T20:37:00+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/02/基于VMware的CentOS7下NAT模式网络配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Hadoop学习第一篇。<br>如何在VMware下配置CentOS7系统的NAT网络模式  </p>
+<h2 id="NAT网络模式"><a href="#NAT网络模式" class="headerlink" title="NAT网络模式"></a>NAT网络模式</h2><p>一共有三种网络模式，分别是  </p>
+<ol>
+<li>桥接模式（VMnet0）</li>
+</ol>
+<ul>
+<li><p>什么是桥接模式呢？形象点说，就是在真实的物理网卡与虚拟网卡VMnet0搭一条通道，这样好似把物理网卡和虚拟网卡VMnet0合二为一了，变成了一个新的网卡；假如，我们把这个网卡叫做bridge0，无论是物理机还是VMware虚拟机访问外网，都通过bridge0这个网卡来进行。</p>
+</li>
+<li><p>另外的说法是，当做了网卡的桥接，VMware里的虚拟机和物理机都处于同一个网段，由同一个交换机连接起来一样；当然，这个交换机也是虚拟的。<br><img src="https://img-blog.csdn.net/20161209145026402?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl5aWJvMzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" align="center" width="300"></p>
+</li>
+</ul>
+<ol start="2">
+<li>NAT模式（VMnet8）</li>
+</ol>
+<ul>
+<li>NAT就是“网络地址转换”，它的功能的实现需要路由器。它的作用就是把私网的ip地址转化为公网的ip地址来访问因特网。<br><img src="https://img-blog.csdn.net/20161209145317797?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl5aWJvMzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" align="center" width="300"></li>
+</ul>
+<ol start="3">
+<li>host-only模式（VMnet1）</li>
+</ol>
+<ul>
+<li>最后，就是仅主机模式了，这个模式其实很简单，虚拟机和物理机只要处于同一个网段，就可以通信，但是不能连接因特网。虚拟机ip属于哪个网段，要参考VMnet1这个网卡的网段。</li>
+</ul>
+<ol start="4">
+<li>一点总结<br>桥接模式是再造一个虚拟“交换机”  ，原主机和虚拟机网卡合并，处于平等地位<br>NAT模式是再造一个虚拟路由器，原主机是路由器，虚拟机网卡连接到路由器下<br>因为NAT模式相对来说更常用一些（它可以将虚拟机隐藏在主机下），所以本文只介绍NAT模式的配置</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/02/基于VMware的CentOS7下NAT模式网络配置/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -577,6 +789,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/27/时间复杂度与空间复杂度/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/27/时间复杂度与空间复杂度/" itemprop="url">0331-对绿色互联网的畅想</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T13:14:00+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随记/" itemprop="url" rel="index">
+                    <span itemprop="name">随记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/27/时间复杂度与空间复杂度/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/27/时间复杂度与空间复杂度/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>占坑</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/27/排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -723,313 +1088,6 @@
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/27/0327-记在葫芦实习的六个月/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/27/0327-记在葫芦实习的六个月/" itemprop="url">0327-记在葫芦实习的六个月</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T13:14:00+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随记/" itemprop="url" rel="index">
-                    <span itemprop="name">随记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/27/0327-记在葫芦实习的六个月/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/27/0327-记在葫芦实习的六个月/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="葫芦"><a href="#葫芦" class="headerlink" title="葫芦"></a>葫芦</h1><p>和葫芦科技的第一次接触是在18年9月，当时有幸在林根大佬的带领下接触到葫芦科技。葫芦科技是一家创业公司，挂靠在东北大学东创空间旗下。<br>短短六个月来持续开发维护运营了“weNEU小程序”、“东大葫芦服务号”、“享问3.0”等有趣的应用，也参与策划了“东大锦鲤”、“东大女生节”、“元旦晚会游戏”、“年终总结”等活动~六个月来认识了很多小伙伴，才发现有这么多和我同届但早已在创业方面做出很多成果的同学。</p>
-<h1 id="再见"><a href="#再见" class="headerlink" title="再见"></a>再见</h1><p>因为四月开始要忙于准备读研相关的事情，可能要暂时离开葫芦了，感谢大家一直以来的帮助，有缘再见~<br><img src="http://ws4.sinaimg.cn/large/006tKfTcly1g1ify2z9ahj31400u0qva.jpg" align="center"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/03/27/时间复杂度与空间复杂度/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/27/时间复杂度与空间复杂度/" itemprop="url">0331-对绿色互联网的畅想</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T13:14:00+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随记/" itemprop="url" rel="index">
-                    <span itemprop="name">随记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/27/时间复杂度与空间复杂度/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/27/时间复杂度与空间复杂度/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>占坑</p>
-
-          
         
       
     </div>
