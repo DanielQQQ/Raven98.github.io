@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,转载," />
+  <meta name="keywords" content="转载,Java," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="static为什么要用static?有一些频繁使用的东西，如果你每次使用都重新new一下，那么这个开销可能会很高，如果使用static，一直放在内存中，那么想用就直接用，而不需要重新new一块空间初始化数据。那么static就是为了实现一个系统的缓存作用的，其生命周期直到应用程序退出结束。这说明，static修饰的类成员，在程序运行过程中，只需要初始化一次即可，不会进行多次的初始化。static可">
-<meta name="keywords" content="Java,转载">
+<meta name="keywords" content="转载,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="认真搞清楚static, final, final static">
 <meta property="og:url" content="https://ravenxu.top/2019/05/12/认真搞清楚static, final, final static/index.html">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="static为什么要用static?有一些频繁使用的东西，如果你每次使用都重新new一下，那么这个开销可能会很高，如果使用static，一直放在内存中，那么想用就直接用，而不需要重新new一块空间初始化数据。那么static就是为了实现一个系统的缓存作用的，其生命周期直到应用程序退出结束。这说明，static修饰的类成员，在程序运行过程中，只需要初始化一次即可，不会进行多次的初始化。static可">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://ws3.sinaimg.cn/large/006tNc79ly1g2ywdvorkcj30dd05ot90.jpg">
-<meta property="og:updated_time" content="2019-05-14T08:11:57.684Z">
+<meta property="og:updated_time" content="2019-05-15T03:02:24.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认真搞清楚static, final, final static">
 <meta name="twitter:description" content="static为什么要用static?有一些频繁使用的东西，如果你每次使用都重新new一下，那么这个开销可能会很高，如果使用static，一直放在内存中，那么想用就直接用，而不需要重新new一块空间初始化数据。那么static就是为了实现一个系统的缓存作用的，其生命周期直到应用程序退出结束。这说明，static修饰的类成员，在程序运行过程中，只需要初始化一次即可，不会进行多次的初始化。static可">
@@ -370,9 +370,15 @@
 <h2 id="static成员变量"><a href="#static成员变量" class="headerlink" title="static成员变量"></a>static成员变量</h2><p><strong>用来修饰成员变量，将其变为类的成员，从而实现所有对象对于该成员的共享</strong><br>静态变量和非静态变量的区别是：  </p>
 <ul>
 <li>静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。</li>
-<li>非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。<br>static不允许用来修饰局部变量，只能修饰成员变量。<h2 id="static方法"><a href="#static方法" class="headerlink" title="static方法"></a>static方法</h2><strong>用来修饰成员方法，将其变为类方法，可以直接使用“类名.方法名”的方式调用，常用于工具类</strong>  </li>
+<li>非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。<br>static不允许用来修饰局部变量，只能修饰成员变量。</li>
+</ul>
+<h2 id="static方法"><a href="#static方法" class="headerlink" title="static方法"></a>static方法</h2><p><strong>用来修饰成员方法，将其变为类方法，可以直接使用“类名.方法名”的方式调用，常用于工具类</strong>  </p>
+<ul>
 <li>首先，在静态方法中不能访问类的非静态成员变量和非静态成员方法。<br>原因：非静态成员（变量和方法）属于类的对象，所以只有在类的对象产生（创建类的实例）时才会分配内存，然后通过类的对象（实例）去访问。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。  </li>
-<li>其次，即使没有显示地声明为static，类的构造器实际上也是静态方法。<h2 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h2><strong>静态块用法，将多个类成员放在一起初始化，使得程序更加规整，其中理解对象的初始化过程非常关键</strong><br>static块可以用来优化程序性能，是因为它的特性:只会在类加载的时候执行一次。<br>很多时候会将一些只需要进行一次的初始化操作都放在static代码块中进行。<blockquote>
+<li>其次，即使没有显示地声明为static，类的构造器实际上也是静态方法。</li>
+</ul>
+<h2 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h2><p><strong>静态块用法，将多个类成员放在一起初始化，使得程序更加规整，其中理解对象的初始化过程非常关键</strong><br>static块可以用来优化程序性能，是因为它的特性:只会在类加载的时候执行一次。<br>很多时候会将一些只需要进行一次的初始化操作都放在static代码块中进行。</p>
+<blockquote>
 <p>一个Java文件从编码完成到最终执行，一般主要包括两个过程</p>
 <ul>
 <li>编译</li>
@@ -380,8 +386,6 @@
 静态代码块先于main函数执行，这是必然的，因为静态代码块是随着类的加载而执行。</li>
 </ul>
 </blockquote>
-</li>
-</ul>
 <hr>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticDemo</span></span>&#123;</span><br><span class="line">    <span class="comment">//静态代码块</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"父类静态代码块被执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//非静态代码块 </span></span><br><span class="line">    &#123;</span><br><span class="line">    System.out.println(<span class="string">"父类非静态代码块被执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//构造方法</span></span><br><span class="line">    StaticDemo() &#123;</span><br><span class="line">        System.out.println(<span class="string">"父类构造方法被执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> <span class="keyword">extends</span> <span class="title">StaticDemo</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 静态代码块的特点：</span></span><br><span class="line"><span class="comment">    * 随着类的加载而执行，而且只执行一次</span></span><br><span class="line"><span class="comment">    * 静态代码块额执行顺序优先于main函数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"子类静态代码块被执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//非静态代码块</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"子类非静态代码块被执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    StaticTest() &#123;</span><br><span class="line">        System.out.println(<span class="string">"子类构造方法被执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] hq)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"main函数"</span>);</span><br><span class="line">        <span class="keyword">new</span> StaticTest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">父类静态代码块被执行</span><br><span class="line">子类静态代码块被执行</span><br><span class="line">main函数</span><br><span class="line">父类非静态代码块被执行</span><br><span class="line">父类构造方法被执行</span><br><span class="line">子类非静态代码块被执行</span><br><span class="line">子类构造方法被执行</span><br></pre></td></tr></table></figure></p>
@@ -434,9 +438,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
             <a href="/tags/转载/" rel="tag"># 转载</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -449,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/08/东软睿道实训杂记/" rel="next" title="「置顶」东软睿道实训杂记">
-                <i class="fa fa-chevron-left"></i> 「置顶」东软睿道实训杂记
+              <a href="/2019/05/12/0512-不要在遗憾过去中沉沦/" rel="next" title="0512-不要在遗憾过去中沉沦">
+                <i class="fa fa-chevron-left"></i> 0512-不要在遗憾过去中沉沦
               </a>
             
           </div>
@@ -459,8 +463,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/12/0512-不要在遗憾过去中沉沦/" rel="prev" title="0512-不要在遗憾过去中沉沦">
-                0512-不要在遗憾过去中沉沦 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/15/初探数据库连接池/" rel="prev" title="初探数据库连接池">
+                初探数据库连接池 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

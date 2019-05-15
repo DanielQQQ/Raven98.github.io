@@ -669,159 +669,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/12/0512-不要在遗憾过去中沉沦/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="url">0512-不要在遗憾过去中沉沦</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T00:00:00+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随记/" itemprop="url" rel="index">
-                    <span itemprop="name">随记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/12/0512-不要在遗憾过去中沉沦/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我这个人有一个问题，总是爱想如果当时我怎么怎么样就好了，换言之总是“拿不起放不下”某些事情<br>比如有时候想，我大一的时候要是高数认真学一学别把绩点拖累得那么严重现在说不定已经稳稳保研了<br>再比如总想我去年智慧旅游的项目如果一开始就紧跟节奏现在论文应该也早就发出去了<br>有一句鸡汤很适合我<br>做这件事最好的时间是一年前<br>其次是现在</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/12/认真搞清楚static, final, final static/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -929,9 +776,15 @@
 <h2 id="static成员变量"><a href="#static成员变量" class="headerlink" title="static成员变量"></a>static成员变量</h2><p><strong>用来修饰成员变量，将其变为类的成员，从而实现所有对象对于该成员的共享</strong><br>静态变量和非静态变量的区别是：  </p>
 <ul>
 <li>静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。</li>
-<li>非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。<br>static不允许用来修饰局部变量，只能修饰成员变量。<h2 id="static方法"><a href="#static方法" class="headerlink" title="static方法"></a>static方法</h2><strong>用来修饰成员方法，将其变为类方法，可以直接使用“类名.方法名”的方式调用，常用于工具类</strong>  </li>
+<li>非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。<br>static不允许用来修饰局部变量，只能修饰成员变量。</li>
+</ul>
+<h2 id="static方法"><a href="#static方法" class="headerlink" title="static方法"></a>static方法</h2><p><strong>用来修饰成员方法，将其变为类方法，可以直接使用“类名.方法名”的方式调用，常用于工具类</strong>  </p>
+<ul>
 <li>首先，在静态方法中不能访问类的非静态成员变量和非静态成员方法。<br>原因：非静态成员（变量和方法）属于类的对象，所以只有在类的对象产生（创建类的实例）时才会分配内存，然后通过类的对象（实例）去访问。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。  </li>
-<li>其次，即使没有显示地声明为static，类的构造器实际上也是静态方法。<h2 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h2><strong>静态块用法，将多个类成员放在一起初始化，使得程序更加规整，其中理解对象的初始化过程非常关键</strong><br>static块可以用来优化程序性能，是因为它的特性:只会在类加载的时候执行一次。<br>很多时候会将一些只需要进行一次的初始化操作都放在static代码块中进行。<blockquote>
+<li>其次，即使没有显示地声明为static，类的构造器实际上也是静态方法。</li>
+</ul>
+<h2 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h2><p><strong>静态块用法，将多个类成员放在一起初始化，使得程序更加规整，其中理解对象的初始化过程非常关键</strong><br>static块可以用来优化程序性能，是因为它的特性:只会在类加载的时候执行一次。<br>很多时候会将一些只需要进行一次的初始化操作都放在static代码块中进行。</p>
+<blockquote>
 <p>一个Java文件从编码完成到最终执行，一般主要包括两个过程</p>
 <ul>
 <li>编译</li>
@@ -943,6 +796,159 @@
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/12/0512-不要在遗憾过去中沉沦/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="url">0512-不要在遗憾过去中沉沦</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T00:00:00+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随记/" itemprop="url" rel="index">
+                    <span itemprop="name">随记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/12/0512-不要在遗憾过去中沉沦/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我这个人有一个问题，总是爱想如果当时我怎么怎么样就好了，换言之总是“拿不起放不下”某些事情<br>比如有时候想，我大一的时候要是高数认真学一学别把绩点拖累得那么严重现在说不定已经稳稳保研了<br>再比如总想我去年智慧旅游的项目如果一开始就紧跟节奏现在论文应该也早就发出去了<br>有一句鸡汤很适合我<br>做这件事最好的时间是一年前<br>其次是现在</p>
+
+          
         
       
     </div>
@@ -1333,198 +1339,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/03/27/排序算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/27/排序算法/" itemprop="url">排序算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T13:14:00+08:00">
-                2019-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/27/排序算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/03/27/排序算法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
-<li>排序是使用最多的算法</li>
-<li>数据结构设计思想<ul>
-<li>divide and conquer 分治</li>
-<li>specialised data structures</li>
-<li>randomised algorithms</li>
-<li>lower bounds</li>
-</ul>
-</li>
-<li>排序算法是很多其他算法的基础<ul>
-<li>搜索</li>
-<li>最短路径</li>
-<li>元素唯一性 Element uniqueness</li>
-<li>频率分布 Frequency distribution</li>
-<li>选择</li>
-<li>计算几何和计算机图形学 Computational Geometry and Computer Graphics(CG)<br>Convex hull 扫描法找凸包 根据角度排序构建最外层点的凸多边形</li>
-</ul>
-</li>
-</ul>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><img src="http://ws4.sinaimg.cn/large/006tNc79ly1g24y3dkjlgj311o0huqhl.jpg" align="center" width="400"></p>
-<ul>
-<li>内部排序 Internal Sort<ul>
-<li>关键字比较法<ul>
-<li>incremental method: Insertion Sort插入排序</li>
-<li>Divide- and- conquer: Quick Sort 快速排序, Merge Sort 归并排序</li>
-<li>Heap Sort 堆排序</li>
-</ul>
-</li>
-<li>distribution<ul>
-<li>Radix Sort 基数排序</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>外部排序 External Sort</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/27/排序算法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/03/27/时间复杂度与空间复杂度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1786,6 +1600,198 @@
 <h1 id="再见"><a href="#再见" class="headerlink" title="再见"></a>再见</h1><p>因为四月开始要忙于准备读研相关的事情，可能要暂时离开葫芦了，感谢大家一直以来的帮助，有缘再见~<br><img src="http://ws4.sinaimg.cn/large/006tKfTcly1g1ify2z9ahj31400u0qva.jpg" align="center"></p>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/03/27/排序算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/27/排序算法/" itemprop="url">排序算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T13:14:00+08:00">
+                2019-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/27/排序算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/27/排序算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
+<li>排序是使用最多的算法</li>
+<li>数据结构设计思想<ul>
+<li>divide and conquer 分治</li>
+<li>specialised data structures</li>
+<li>randomised algorithms</li>
+<li>lower bounds</li>
+</ul>
+</li>
+<li>排序算法是很多其他算法的基础<ul>
+<li>搜索</li>
+<li>最短路径</li>
+<li>元素唯一性 Element uniqueness</li>
+<li>频率分布 Frequency distribution</li>
+<li>选择</li>
+<li>计算几何和计算机图形学 Computational Geometry and Computer Graphics(CG)<br>Convex hull 扫描法找凸包 根据角度排序构建最外层点的凸多边形</li>
+</ul>
+</li>
+</ul>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><img src="http://ws4.sinaimg.cn/large/006tNc79ly1g24y3dkjlgj311o0huqhl.jpg" align="center" width="400"></p>
+<ul>
+<li>内部排序 Internal Sort<ul>
+<li>关键字比较法<ul>
+<li>incremental method: Insertion Sort插入排序</li>
+<li>Divide- and- conquer: Quick Sort 快速排序, Merge Sort 归并排序</li>
+<li>Heap Sort 堆排序</li>
+</ul>
+</li>
+<li>distribution<ul>
+<li>Radix Sort 基数排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>外部排序 External Sort</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/27/排序算法/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
