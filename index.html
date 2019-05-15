@@ -263,6 +263,230 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/15/初探数据库连接池/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/15/初探数据库连接池/" itemprop="url">初探数据库连接池</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T10:00:00+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/15/初探数据库连接池/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/15/初探数据库连接池/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考资料</p>
+<ul>
+<li><a href="https://blog.csdn.net/crankz/article/details/82874158" target="_blank" rel="noopener">数据库连接池学习笔记（一）：原理介绍+常用连接池介绍</a><h1 id="为什么要使用连接池"><a href="#为什么要使用连接池" class="headerlink" title="为什么要使用连接池"></a>为什么要使用连接池</h1>数据库连接是一种关键的有限的昂贵的资源，这一点在多用户的网页应用程序中体现得尤为突出。  一个数据库连接对象均对应一个物理数据库连接，每次操作都打开一个物理连接，使用完都关闭连接，这样造成系统的 性能低下。 数据库连接池的解决方案是在应用程序启动时建立足够的数据库连接，并讲这些连接组成一个连接池(简单说：在一个“池”里放了好多半成品的数据库联接对象)，由应用程序动态地对池中的连接进行申请、使用和释放。对于多于连接池中连接数的并发请求，应该在请求队列中排队等待。并且应用程序可以根据池中连接的使用率，动态增加或减少池中的连接数。 连接池技术尽可能多地重用了消耗内存地资源，大大节省了内存，提高了服务器地服务效率，能够支持更多的客户服务。通过使用连接池，将大大提高程序运行效率，同时，我们可以通过其自身的管理机制来监视数据库连接的数量、使用情况等。 <h1 id="传统的连接机制与数据库连接池的运行机制区别"><a href="#传统的连接机制与数据库连接池的运行机制区别" class="headerlink" title="传统的连接机制与数据库连接池的运行机制区别"></a>传统的连接机制与数据库连接池的运行机制区别</h1><h2 id="不使用连接池流程"><a href="#不使用连接池流程" class="headerlink" title="不使用连接池流程"></a>不使用连接池流程</h2>下面以访问MySQL为例，执行一个SQL命令，如果不使用连接池，需要经过哪些流程。<br><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g3116moxfaj30d40dgdgt.jpg" width="400px"></li>
+<li><p>步骤</p>
+<ol>
+<li>TCP建立连接的三次握手（JDBC与MySQL的连接基于TCP协议）</li>
+<li>MySQL认证的三次握手</li>
+<li>真正的SQL执行</li>
+<li>MySQL的关闭</li>
+<li>TCP的四次握手关闭<br>可以看到，为了执行一条SQL，却多了非常多我们不关心的网络交互。</li>
+</ol>
+</li>
+<li><p>优点</p>
+<ul>
+<li>实现简单</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ol>
+<li>网络IO较多</li>
+<li>数据库的负载较高</li>
+<li>响应时间较长及QPS较低（每秒查询率QPS是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准）</li>
+<li>应用频繁的创建连接和关闭连接，导致临时对象较多，GC频繁</li>
+<li>在关闭连接后，会出现大量TIME_WAIT的TCP状态（在2个MSL之后关闭，这个是TCP/IP的设计者规定的<a href="https://www.cnblogs.com/sunxucool/p/3449068.html" target="_blank" rel="noopener">详情</a>）</li>
+</ol>
+</li>
+</ul>
+<h2 id="使用数据库连接池"><a href="#使用数据库连接池" class="headerlink" title="使用数据库连接池"></a>使用数据库连接池</h2><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g311fkf2cqj30f80fdtb5.jpg" width="400px"></p>
+<ul>
+<li><p>步骤</p>
+<ul>
+<li>第一次访问的时候，需要建立连接。 但是之后的访问，均会复用之前创建的连接，直接执行SQL语句。</li>
+</ul>
+</li>
+<li><p>优点</p>
+<ol>
+<li>较少了网络开销</li>
+<li>系统的性能会有一个实质的提升</li>
+<li>没了麻烦的TIME_WAIT状态</li>
+</ol>
+</li>
+</ul>
+<h1 id="数据库连接池的工作原理"><a href="#数据库连接池的工作原理" class="headerlink" title="数据库连接池的工作原理"></a>数据库连接池的工作原理</h1><p>连接池的工作原理主要由三部分组成，分别为</p>
+<ol>
+<li>连接池的建立</li>
+<li>连接池中连接的使用管理</li>
+<li>连接池的关闭</li>
+</ol>
+<p>第一、连接池的建立。一般在系统初始化时，连接池会根据系统配置建立，并在池中创建了几个连接对象，以便使用时能从连接池中获取。连接池中的连接不能随意创建和关闭，这样避免了连接随意建立和关闭造成的系统开销。Java中提供了很多容器类可以方便的构建连接池，例如Vector、Stack等。</p>
+<p>第二、连接池的管理。连接池管理策略是连接池机制的核心，连接池内连接的分配和释放对系统的性能有很大的影响。其管理策略是：<br>当客户请求数据库连接时，首先查看连接池中是否有空闲连接，如果存在空闲连接，则将连接分配给客户使用；如果没有空闲连接，则查看当前所开的连接数是否已经达到最大连接数，如果没达到就重新创建一个连接给请求的客户；如果达到就按设定的最大等待时间进行等待，如果超出最大等待时间，则抛出异常给客户。<br>当客户释放数据库连接时，先判断该连接的引用次数是否超过了规定值，如果超过就从连接池中删除该连接，否则保留为其他客户服务。<br>该策略保证了数据库连接的有效复用，避免频繁的建立、释放连接所带来的系统资源开销。</p>
+<p>第三、连接池的关闭。当应用程序退出时，关闭连接池中所有的连接，释放连接池相关的资源，该过程正好与创建相反。</p>
+<h1 id="连接池主要参数"><a href="#连接池主要参数" class="headerlink" title="连接池主要参数"></a>连接池主要参数</h1><p><strong>使用连接池时，要配置一下参数</strong></p>
+<ol>
+<li>最小连接数：是连接池一直保持的数据库连接,所以如果应用程序对数据库连接的使用量不大,将会有大量的数据库连接资源被浪费.</li>
+<li>最大连接数：是连接池能申请的最大连接数,如果数据库连接请求超过次数,后面的数据库连接请求将被加入到等待队列中,这会影响以后的数据库操作</li>
+<li>最大空闲时间</li>
+<li>获取连接超时时间</li>
+<li>超时重试连接次数</li>
+</ol>
+<h1 id="连接池需要注意的点"><a href="#连接池需要注意的点" class="headerlink" title="连接池需要注意的点"></a>连接池需要注意的点</h1><h2 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h2><p>为了使连接管理服务具有最大的通用性，必须考虑多线程环境，即并发问题。这个问题相对比较好解决，因为各个语言自身提供了对并发管理的支持像java,c#等等，使用synchronized(java)lock(C#)关键字即可确保线程是同步的。使用方法可以参考，相关文献。</p>
+<h2 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h2><p>我们知道，事务具有原子性，此时要求对数据库的操作符合“ALL-OR-NOTHING”原则,即对于一组SQL语句要么全做，要么全不做。<br>我们知道当2个线程共用一个连接Connection对象，而且各自都有自己的事务要处理时候，对于连接池是一个很头疼的问题，因为即使Connection类提供了相应的事务支持，可是我们仍然不能确定那个数据库操作是对应那个事务的，这是由于我们有２个线程都在进行事务操作而引起的。为此我们可以使用每一个事务独占一个连接来实现，虽然这种方法有点浪费连接池资源但是可以大大降低事务管理的复杂性。 </p>
+<h2 id="连接池的分配与释放"><a href="#连接池的分配与释放" class="headerlink" title="连接池的分配与释放"></a>连接池的分配与释放</h2><p>连接池的分配与释放，对系统的性能有很大的影响。合理的分配与释放，可以提高连接的复用度，从而降低建立新连接的开销，同时还可以加快用户的访问速度。<br>对于连接的管理可使用一个List。即把已经创建的连接都放入List中去统一管理。每当用户请求一个连接时，系统检查这个List中有没有可以分配的连接。如果有就把那个最合适的连接分配给他（如何能找到最合适的连接文章将在关键议题中指出）；如果没有就抛出一个异常给用户，List中连接是否可以被分配由一个线程来专门管理捎后我会介绍这个线程的具体实现。</p>
+<h2 id="连接池的配置与维护"><a href="#连接池的配置与维护" class="headerlink" title="连接池的配置与维护"></a>连接池的配置与维护</h2><p>连接池中到底应该放置多少连接，才能使系统的性能最佳？系统可采取设置最小连接数（minConnection）和最大连接数（maxConnection）等参数来控制连接池中的连接。比方说，最小连接数是系统启动时连接池所创建的连接数。如果创建过多，则系统启动就慢，但创建后系统的响应速度会很快；如果创建过少，则系统启动的很快，响应起来却慢。这样，可以在开发时，设置较小的最小连接数，开发起来会快，而在系统实际使用时设置较大的，因为这样对访问客户来说速度会快些。最大连接数是连接池中允许连接的最大数目，具体设置多少，要看系统的访问量，可通过软件需求上得到。<br>如何确保连接池中的最小连接数呢？有动态和静态两种策略。动态即每隔一定时间就对连接池进行检测，如果发现连接数量小于最小连接数，则补充相应数量的新连接,以保证连接池的正常运转。静态是发现空闲连接不够时再去检查。</p>
+<h1 id="数据库对比"><a href="#数据库对比" class="headerlink" title="数据库对比"></a>数据库对比</h1><h2 id="第一、二代连接池"><a href="#第一、二代连接池" class="headerlink" title="第一、二代连接池"></a>第一、二代连接池</h2><p>区分一个数据库连接池是属于第一代产品还是代二代产品有一个最重要的特征就是看它在架构和设计时采用的线程模型，因为这直接影响的是并发环境下存取数据库连接的性能。</p>
+<p>一般来讲采用单线程同步的架构设计都属于第一代连接池，二采用多线程异步架构的则属于第二代。比较有代表性的就是Apache Commons DBCP，在1.x版本中，一直延续着单线程设计模式，到2.x才采用多线程模型。</p>
+<p>二代产品对一代产品的超越是颠覆性的，除了一些“历史原因”，你很难再找到第二条理由说服自己不选择二代产品，但任何成功都不是偶然的，二代产品的成功很大程度上得益于前代产品们打下的基础，站在巨人的肩膀上，新一代的连接池的设计师们将这一项“工具化”的产品，推向了极致。其中，最具代表性的两款产品是：</p>
+<ul>
+<li>HikariCP</li>
+<li>Druid</li>
+</ul>
+<p>下面更多介绍请参考<a href="https://blog.csdn.net/crankz/article/details/82874158" target="_blank" rel="noopener">数据库连接池对比</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>时至今日，虽然每个应用（需要RDBMS的）都离不开连接池，但在实际使用的时候，连接池已经可以做到“<strong>隐形</strong>”了。也就是说在通常情况下，连接池完成项目初始化配置之后，就再不需要再做任何改动了。不论你是选择Druid或是HikariCP，甚至是DBCP，它们都足够稳定且高效！之前讨论了很多关于连接池的性能的问题，但这些性能上的差异，是相较于其他连接池而言的，对整个系统应用来说，第二代连接池在使用过程中体会到的差别是微乎其微的，基本上不存在因为连接池的自身的配饰和使用导致系统性能下降的情况，除非是在单点应用的数据库负载足够高的时候（压力测试的时候），但即便是如此，通用的优化的方式也是单点改集群，而不是在单点的连接池上死扣。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/08/东软睿道实训杂记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -373,16 +597,17 @@
 <li>背景：软件学院大三下学期9学分<a href="http://sc.neu.edu.cn/2019/0328/c99a90425/page.htm" target="_blank" rel="noopener">企业项目实训</a></li>
 </ul>
 <h2 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h2><ul>
-<li><a href="#day-1---day-4-mybatis">Day 1 - Day 4: MyBatis</a></li>
+<li><a href="#day-1---day-3-mybatis">Day 1 - Day 3: MyBatis</a></li>
 <li><a href="#day-4---day-5-spring-ioc">Day 4 - Day 5: Spring IOC</a></li>
-<li><a href="#day-6---day-x-spring-aop">Day 6 - Day X: Spring AOP</a> </li>
+<li><a href="#day-6---day-7-spring-aop">Day 6 - Day 7: Spring AOP</a> </li>
+<li><a href="#day-8---day-x-spring-mvc">Day 8 - Day X: Spring MVC</a></li>
 <li>Learning…</li>
 </ul>
 <h2 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h2><p>⚠️<strong>受本人学识所限，本项目笔记的学习意义不大，更多地可作为同期课程同学对课堂知识的一个回顾即课程讲义😋</strong>  </p>
 <h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><p><strong>欢迎各位大佬在<a href="https://github.com/Raven98/Neuedu" target="_blank" rel="noopener">本项目</a>发起PR或在Issues里留言邀请您成为协作者，共同完善本文档</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Raven98/Neuedu.git</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>为了获得更优阅读体验，您可移步至我的博客：<br><a href="https://ravenxu.top/2019/05/07/%E4%B8%9C%E8%BD%AF%E7%9D%BF%E9%81%93%E5%AE%9E%E8%AE%AD%E6%9D%82%E8%AE%B0/">东软睿道实训杂记</a></p>
-<h1 id="Day-1-Day-4-MyBatis"><a href="#Day-1-Day-4-MyBatis" class="headerlink" title="Day 1 - Day 4: MyBatis"></a>Day 1 - Day 4: MyBatis</h1><ul>
+<h1 id="Day-1-Day-3-MyBatis"><a href="#Day-1-Day-3-MyBatis" class="headerlink" title="Day 1 - Day 3: MyBatis"></a>Day 1 - Day 3: MyBatis</h1><ul>
 <li><a href="https://github.com/Raven98/Neuedu/tree/master/TestMyBatis" target="_blank" rel="noopener">参考代码</a></li>
 <li><a href="http://www.mybatis.org/mybatis-3/" target="_blank" rel="noopener">MyBatis 英文文档</a></li>
 <li><a href="http://www.mybatis.org/mybatis-3/zh/getting-started.html" target="_blank" rel="noopener">MyBatis 中文文档</a><br><em>本文内容很大程度地参考了官方文档，mybatis有中文版本的文档并且极其简洁，推荐阅读</em><h2 id="1-了解MyBatis"><a href="#1-了解MyBatis" class="headerlink" title="1. 了解MyBatis"></a>1. 了解MyBatis</h2></li>
@@ -398,6 +623,159 @@
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/12/0512-不要在遗憾过去中沉沦/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="url">0512-不要在遗憾过去中沉沦</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T00:00:00+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随记/" itemprop="url" rel="index">
+                    <span itemprop="name">随记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/12/0512-不要在遗憾过去中沉沦/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我这个人有一个问题，总是爱想如果当时我怎么怎么样就好了，换言之总是“拿不起放不下”某些事情<br>比如有时候想，我大一的时候要是高数认真学一学别把绩点拖累得那么严重现在说不定已经稳稳保研了<br>再比如总想我去年智慧旅游的项目如果一开始就紧跟节奏现在论文应该也早就发出去了<br>有一句鸡汤很适合我<br>做这件事最好的时间是一年前<br>其次是现在</p>
+
+          
         
       
     </div>
@@ -565,159 +943,6 @@
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/05/12/0512-不要在遗憾过去中沉沦/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="url">0512-不要在遗憾过去中沉沦</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T00:00:00+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随记/" itemprop="url" rel="index">
-                    <span itemprop="name">随记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/12/0512-不要在遗憾过去中沉沦/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/05/12/0512-不要在遗憾过去中沉沦/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我这个人有一个问题，总是爱想如果当时我怎么怎么样就好了，换言之总是“拿不起放不下”某些事情<br>比如有时候想，我大一的时候要是高数认真学一学别把绩点拖累得那么严重现在说不定已经稳稳保研了<br>再比如总想我去年智慧旅游的项目如果一开始就紧跟节奏现在论文应该也早就发出去了<br>有一句鸡汤很适合我<br>做这件事最好的时间是一年前<br>其次是现在</p>
-
-          
         
       
     </div>
@@ -1108,6 +1333,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/03/27/排序算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Raven Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog | Raven Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/27/排序算法/" itemprop="url">排序算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T13:14:00+08:00">
+                2019-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/27/排序算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/27/排序算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
+<li>排序是使用最多的算法</li>
+<li>数据结构设计思想<ul>
+<li>divide and conquer 分治</li>
+<li>specialised data structures</li>
+<li>randomised algorithms</li>
+<li>lower bounds</li>
+</ul>
+</li>
+<li>排序算法是很多其他算法的基础<ul>
+<li>搜索</li>
+<li>最短路径</li>
+<li>元素唯一性 Element uniqueness</li>
+<li>频率分布 Frequency distribution</li>
+<li>选择</li>
+<li>计算几何和计算机图形学 Computational Geometry and Computer Graphics(CG)<br>Convex hull 扫描法找凸包 根据角度排序构建最外层点的凸多边形</li>
+</ul>
+</li>
+</ul>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><img src="http://ws4.sinaimg.cn/large/006tNc79ly1g24y3dkjlgj311o0huqhl.jpg" align="center" width="400"></p>
+<ul>
+<li>内部排序 Internal Sort<ul>
+<li>关键字比较法<ul>
+<li>incremental method: Insertion Sort插入排序</li>
+<li>Divide- and- conquer: Quick Sort 快速排序, Merge Sort 归并排序</li>
+<li>Heap Sort 堆排序</li>
+</ul>
+</li>
+<li>distribution<ul>
+<li>Radix Sort 基数排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>外部排序 External Sort</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/27/排序算法/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/03/27/时间复杂度与空间复杂度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1415,198 +1832,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/03/27/排序算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/27/排序算法/" itemprop="url">排序算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T13:14:00+08:00">
-                2019-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/27/排序算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/03/27/排序算法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
-<li>排序是使用最多的算法</li>
-<li>数据结构设计思想<ul>
-<li>divide and conquer 分治</li>
-<li>specialised data structures</li>
-<li>randomised algorithms</li>
-<li>lower bounds</li>
-</ul>
-</li>
-<li>排序算法是很多其他算法的基础<ul>
-<li>搜索</li>
-<li>最短路径</li>
-<li>元素唯一性 Element uniqueness</li>
-<li>频率分布 Frequency distribution</li>
-<li>选择</li>
-<li>计算几何和计算机图形学 Computational Geometry and Computer Graphics(CG)<br>Convex hull 扫描法找凸包 根据角度排序构建最外层点的凸多边形</li>
-</ul>
-</li>
-</ul>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><img src="http://ws4.sinaimg.cn/large/006tNc79ly1g24y3dkjlgj311o0huqhl.jpg" align="center" width="400"></p>
-<ul>
-<li>内部排序 Internal Sort<ul>
-<li>关键字比较法<ul>
-<li>incremental method: Insertion Sort插入排序</li>
-<li>Divide- and- conquer: Quick Sort 快速排序, Merge Sort 归并排序</li>
-<li>Heap Sort 堆排序</li>
-</ul>
-</li>
-<li>distribution<ul>
-<li>Radix Sort 基数排序</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>外部排序 External Sort</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/27/排序算法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2019/02/03/什么是模型？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1760,164 +1985,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ravenxu.top/2018/11/15/字符编码整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Raven Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog | Raven Xu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/15/字符编码整理/" itemprop="url">常用字符编码整理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-15T00:00:00+08:00">
-                2018-11-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/15/字符编码整理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/15/字符编码整理/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这两天在预习人工智能课要用的的python语言，循着廖雪峰老师的博客在学习。<br>发现教程里再次提到了关于各种编码的事情，我想有必要单独写一篇文章也算是一种总结。</p>
-<h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><p>因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数，就必须用更多的字节。比如两个字节可以表示的最大整数是65535，4个字节可以表示的最大整数是4294967295。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/15/字符编码整理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1972,7 +2039,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1983,7 +2050,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1994,7 +2061,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
