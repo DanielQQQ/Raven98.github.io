@@ -88,7 +88,8 @@
 <meta property="og:description" content="今天在更新博客时有关于Vue动态绑定的内容，动态绑定v-model属性是配合双括号这里报错来实现的     但是如果像上面图片里写这句话是会报错的呦，节选报错信息开头部分如下： 1234Template render error: (unknown path) [Line 1, Column 64]  unexpected token: &amp;#125;&amp;#125;    at Object._pre">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g37z4w7r1cj30vk01gjrr.jpg">
-<meta property="og:updated_time" content="2019-05-20T10:57:33.712Z">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g37zgjx4g2j312y00ydgb.jpg">
+<meta property="og:updated_time" content="2019-05-20T10:59:38.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo处理{{}}报错">
 <meta name="twitter:description" content="今天在更新博客时有关于Vue动态绑定的内容，动态绑定v-model属性是配合双括号这里报错来实现的     但是如果像上面图片里写这句话是会报错的呦，节选报错信息开头部分如下： 1234Template render error: (unknown path) [Line 1, Column 64]  unexpected token: &amp;#125;&amp;#125;    at Object._pre">
@@ -371,7 +372,9 @@
 <p>但是如果像上面图片里写这句话是会报错的呦，节选报错信息开头部分如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Template render error: (unknown path) [Line 1, Column 64]</span><br><span class="line">  unexpected token: &#125;&#125;</span><br><span class="line">    at Object._prettifyError (/Users/raven/workspace/blog/node_modules/nunjucks/src/lib.js:36:11)</span><br><span class="line">    at Template.render (/Users/raven/workspace/blog/node_modules/nunjucks/src/environment.js:524:21)</span><br></pre></td></tr></table></figure>
 <p>在一点点试错后发现正是两对紧密相连的<code>{}</code>使其报错，猜测应该是这种写法恰好和hexo内部的解析器有冲突吧</p>
-<p>在双括号内加入一些文字即不报错<code></code>，但是无法正常显示哦，就比如这一行的那个代码块，里面的message就没显示<br><em>注意：在双括号内加入空格还是会报错哦</em>  </p>
+<p>在双括号内加入一些文字即不报错<code></code>，但是无法正常显示哦，就比如这一行的那个代码块，里面的message就没显示  </p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g37zgjx4g2j312y00ydgb.jpg">   </p>
+<p><em>注意：在双括号内加入空格还是会报错哦</em>  </p>
 <p>目测应该还会有其他写法使hexo的转义发生错误，有时间看一下hexo源码找到错误位置再更新一下本文</p>
 
       
